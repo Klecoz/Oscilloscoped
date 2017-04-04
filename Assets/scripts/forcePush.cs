@@ -16,12 +16,15 @@ public class forcePush : MonoBehaviour {
     public AudioClip shootSound;
     public Text myTextHealth;
     public Text myTextScore;
-
-    public float ringTime;
     public float destroyTime = 0.1f;
 
+    //Game Spawners
+    public GameObject spawn1;
+    public GameObject spawn2;
+    public GameObject spawn3;
+    public GameObject spawn4;
+
     private AudioSource source;
-    public List<Asteroid> _touchingAsteroids = new List<Asteroid>();
 
 
     void Awake()
@@ -40,6 +43,8 @@ public class forcePush : MonoBehaviour {
         myTextHealth = GameObject.Find("health").GetComponent<Text>();
         myTextScore = GameObject.Find("score").GetComponent<Text>();
 
+        myTextScore.text = "Score: " + score;
+
         Attack();
         Move();
 
@@ -57,7 +62,8 @@ public class forcePush : MonoBehaviour {
 
        if (score == 5)
         {
-
+            spawn1.SetActive(true);
+            spawn2.SetActive(true);
         }
 
     }
@@ -71,100 +77,25 @@ public class forcePush : MonoBehaviour {
             
             source.PlayOneShot(shootSound);
         }
-        
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (_touchingAsteroids.Count == 0)
-                return;
-            /*
-            for(int x = 0; x<_touchingAsteroids.Count; x++)
-            {
-                Asteroid a = _touchingAsteroids[x];
-            }
-            */
-
-            foreach(Asteroid a in _touchingAsteroids)
-            {
-                if (a != null && powerLimit != 0)
-                {
-                    //a.gameObject.GetComponent<Rigidbody>().AddForce(0, 500, 0);
-                    Instantiate(explode, a.transform.position, a.transform.rotation);
-                    Destroy(a.gameObject, destroyTime);
-                    Destroy(GameObject.FindWithTag("explode"), .5f);
-                    score++;
-                    myTextScore.text = "Score: " + score;
-                    powerLimit--;
-                }
-            }
-
-            if (powerLimit != 0)
-            {
-                GameObject instantiatedRing = Instantiate(ring);
-                StartCoroutine(Grow(instantiatedRing, ringTime, 5));
-                AudioSource audio = GetComponent<AudioSource>();
-                audio.Play();
-            }
-
-
-        }
-
-        
-
 
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        Asteroid a = collision.collider.GetComponent<Asteroid>();
-        if (a != null)
-        {
-            _touchingAsteroids.Add(a);
-        }
+        Destroy(collision.gameObject);
+        TakeDamage(1);
     }
 
-    void OnCollisionExit(Collision collision)
+   /* void OnCollisionExit(Collision collision)
     {
         Asteroid a = collision.collider.GetComponent<Asteroid>();
         if (a != null)
         {
-            _touchingAsteroids.Remove(a);
+            
         }
     }
+    */
 
-  
-    /*
-    void OnCollisionStay(Collision other)
-    {
-            
-            //float force = 3;
-            
-            // If the object we hit is the enemy
-            if (other.gameObject.tag == "Enemy")
-            {
-            Debug.Log(other + " is colliding");
-
-            Debug.Log(Time.deltaTime + " is the time between frames");
-
-            if (Input.GetKeyUp("space"))
-            {
-                other.gameObject.GetComponent<Rigidbody>().AddForce(0, 500, 0);
-                Destroy(other.gameObject, 1);
-
-
-                GameObject instantiatedRing = Instantiate(ring);
-                StartCoroutine(Grow(instantiatedRing, ringTime, 5));
-                AudioSource audio = GetComponent<AudioSource>();
-                audio.pitch = Random.Range(1 - rando, 1 + rando);
-                audio.Play();
-                //Instantiate(ring, transform.localScale * 10 * Time.deltaTime, transform.rotation);
-
-            }
-
-
-            }
-
-    }*/
 
     public void TakeDamage(int damageAmount)
     {
@@ -188,27 +119,6 @@ public class forcePush : MonoBehaviour {
         {
             transform.Rotate(-Vector3.up * 120 * Time.deltaTime);
         }
-    }
-
-    IEnumerator Grow(GameObject thingToGrow, float timeBig, float bigScale)
-    {
-        float initial = thingToGrow.transform.localScale.x;
-        float final = bigScale * initial;
-        float diff = final - initial ;
-        float rate = diff / timeBig;
-        while (thingToGrow.transform.localScale.x < final)
-        {
-            float newScale = thingToGrow.transform.localScale.x + rate * Time.deltaTime;
-            if (newScale > final)
-            {
-                newScale = final;
-            }
-            thingToGrow.transform.localScale = new Vector3(newScale, newScale, newScale);
-            yield return new WaitForEndOfFrame();
-        }
-
-
-        Destroy(thingToGrow);
     }
 
 }

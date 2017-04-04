@@ -1,15 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class bullet : MonoBehaviour {
 
     public GameObject explode;
-    
+
+
+
 
     // Use this for initialization
     void Start () {
-	}
+        GameObject collsphere = GameObject.Find("collidaSphere");
+        forcePush fp = collsphere.GetComponent<forcePush>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -22,23 +27,17 @@ public class bullet : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-
         if (collision.gameObject.tag == "Enemy")
         {
+            //fp.score++;
+            GameObject collsphere = GameObject.Find("collidaSphere");
+            forcePush fp = collsphere.GetComponent<forcePush>();
+            fp.score++;
             Instantiate(explode, collision.transform.position, collision.transform.rotation);
             Destroy(collision.gameObject);
             Destroy(GameObject.FindWithTag("explode"), 1);
         }
-        
-        
 
     }
 
-    void updateScore ()
-    {
-        
-        /*fp.score = fp.score + 1;
-        fp.myTextScore.text = "Score: " + fp.score;*/
-
-    }
 }

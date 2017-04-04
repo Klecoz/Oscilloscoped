@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -107,7 +107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &80327411
 RectTransform:
   m_ObjectHideFlags: 0
@@ -407,9 +407,11 @@ MonoBehaviour:
   shootSound: {fileID: 8300000, guid: a86277dac6804f1479aa06e9ed7f1034, type: 3}
   myTextHealth: {fileID: 0}
   myTextScore: {fileID: 0}
-  ringTime: 0.3
   destroyTime: 0.3
-  _touchingAsteroids: []
+  spawn1: {fileID: 0}
+  spawn2: {fileID: 0}
+  spawn3: {fileID: 0}
+  spawn4: {fileID: 0}
 --- !u!82 &686175233
 AudioSource:
   m_ObjectHideFlags: 0
@@ -718,7 +720,7 @@ ParticleSystem:
   m_GameObject: {fileID: 938929157}
   serializedVersion: 5
   lengthInSec: 5
-  speed: 1
+  simulationSpeed: 1
   looping: 0
   prewarm: 0
   playOnAwake: 0
