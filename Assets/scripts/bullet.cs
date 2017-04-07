@@ -35,6 +35,7 @@ public class bullet : MonoBehaviour {
             Instantiate(explode, collision.transform.position, collision.transform.rotation);
             Destroy(collision.gameObject);
             Destroy(GameObject.FindWithTag("explode"), .5f);
+            Destroy(this.gameObject);
         }
 
     }
