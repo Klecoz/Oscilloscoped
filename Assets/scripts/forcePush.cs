@@ -63,6 +63,7 @@ public class forcePush : MonoBehaviour {
 
         Attack();
         Move();
+        resetGame();
 
             if (health == 0 && gameOver == false)
         {
@@ -178,6 +179,14 @@ public class forcePush : MonoBehaviour {
         if (Input.GetKey(KeyCode.D))
         {
             transform.Rotate(-Vector3.up * 150 * Time.deltaTime);
+        }
+    }
+
+    void resetGame()
+    {
+        if (Input.GetKey(KeyCode.P))
+        {
+            SceneManager.LoadScene("Title");
         }
     }
 
