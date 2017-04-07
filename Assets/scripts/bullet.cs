@@ -12,8 +12,7 @@ public class bullet : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        GameObject collsphere = GameObject.Find("collidaSphere");
-        forcePush fp = collsphere.GetComponent<forcePush>();
+
     }
 	
 	// Update is called once per frame
@@ -35,7 +34,7 @@ public class bullet : MonoBehaviour {
             fp.score++;
             Instantiate(explode, collision.transform.position, collision.transform.rotation);
             Destroy(collision.gameObject);
-            Destroy(GameObject.FindWithTag("explode"), 1);
+            Destroy(GameObject.FindWithTag("explode"), .5f);
         }
 
     }

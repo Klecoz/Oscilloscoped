@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - explode
   - bullet
+  - spawners
+  - gameover
   layers:
   - Default
   - TransparentFX
