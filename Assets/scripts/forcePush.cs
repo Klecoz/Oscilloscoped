@@ -81,6 +81,7 @@ public class forcePush : MonoBehaviour
 
         Move();
         resetGame();
+        cheatCode();
 
         if (health == 0 && gameOver == false)
         {
@@ -129,7 +130,7 @@ public class forcePush : MonoBehaviour
 
     void Attack()
     {
-        if (Input.GetKeyUp(KeyCode.W))
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             GameObject bullet = Instantiate(projectile, transform.forward, Quaternion.identity) as GameObject;
             bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 300);
@@ -213,12 +214,12 @@ public class forcePush : MonoBehaviour
 
     void Move()
     {
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.Rotate(Vector3.up * 150 * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.Rotate(-Vector3.up * 150 * Time.deltaTime);
         }
@@ -229,6 +230,15 @@ public class forcePush : MonoBehaviour
         if (Input.GetKey(KeyCode.P))
         {
             SceneManager.LoadScene("Title");
+        }
+    }
+
+    void cheatCode()
+    {
+        if (Input.GetKey(KeyCode.Y))
+        {
+            Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+            Destroy(GameObject.FindGameObjectWithTag("bigEnemy"));
         }
     }
 
