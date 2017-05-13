@@ -123,4 +123,4 @@ MonoBehaviour:
   explode: {fileID: 1000013063239222, guid: 843695ef5e6d39f458b99e399ccc09b1, type: 2}
   healthBonusImage: {fileID: 1215940838632788, guid: 2ef8d2921fbf6674fada0c6333c2ae9e,
     type: 2}
-  bigastroid: {fileID: 1309636311996896, guid: f25e558ccac48d54d919e018d23deb62, type: 2}
+  bigHealthRemove: {fileID: 0}

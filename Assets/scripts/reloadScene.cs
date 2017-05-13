@@ -14,4 +14,9 @@ public class reloadScene : MonoBehaviour {
     {
         SceneManager.LoadScene("Title");
     }
+
+    public void playGame()
+    {
+        SceneManager.LoadScene("scene1");
+    }
 }
