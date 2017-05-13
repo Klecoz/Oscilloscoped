@@ -26,6 +26,7 @@ public class forcePush : MonoBehaviour {
     public GameObject spawn2;
     public GameObject spawn3;
     public GameObject spawn4;
+    public GameObject spawn5;
 
     //Health Images
     public GameObject health1;
@@ -40,6 +41,8 @@ public class forcePush : MonoBehaviour {
     public GameObject UI3;
 
     private AudioSource source;
+    public float nextFire = -1.0f;
+
 
 
     void Awake()
@@ -51,7 +54,7 @@ public class forcePush : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
+        nextFire = Time.time;
     }
 	
 	// Update is called once per frame
@@ -61,7 +64,11 @@ public class forcePush : MonoBehaviour {
 
         myTextScore.text = "Score: " + score;
 
-        Attack();
+        if (Time.time >= nextFire)
+        {
+            Attack();
+        }
+
         Move();
         resetGame();
 
@@ -101,6 +108,7 @@ public class forcePush : MonoBehaviour {
         {
             spawn3.SetActive(true);
             spawn4.SetActive(true);
+            spawn5.SetActive(true);
         }
 
     }
@@ -111,7 +119,7 @@ public class forcePush : MonoBehaviour {
         {
             GameObject bullet = Instantiate(projectile, transform.forward, Quaternion.identity) as GameObject;
             bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 300);
-            
+            nextFire = Time.time + .3f;
             source.PlayOneShot(shootSound);
         }
 

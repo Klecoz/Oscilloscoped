@@ -214,6 +214,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 54783503}
+--- !u!1 &104714786 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1371232868377592, guid: 7a993688dc1a5de418412c004c979655,
+    type: 2}
+  m_PrefabInternal: {fileID: 506445063}
 --- !u!1001 &111996729
 Prefab:
   m_ObjectHideFlags: 0
@@ -906,6 +911,7 @@ MonoBehaviour:
   spawn2: {fileID: 716450774}
   spawn3: {fileID: 383728085}
   spawn4: {fileID: 1672369124}
+  spawn5: {fileID: 104714786}
   health1: {fileID: 338524523}
   health2: {fileID: 906124291}
   health3: {fileID: 602166411}
