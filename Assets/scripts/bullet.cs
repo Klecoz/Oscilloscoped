@@ -54,7 +54,7 @@ public class bullet : MonoBehaviour {
                 Instantiate(healthBonusImage, collision.transform.position, collision.transform.rotation);
                 Destroy(collision.gameObject);
                 Destroy(GameObject.FindWithTag("explode"), .5f);
-                Destroy(GameObject.FindWithTag("healthExplode"), .9f);
+                Destroy(GameObject.FindWithTag("healthExplode"), 3f);
                 Destroy(this.gameObject);
             }
         }

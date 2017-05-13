@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class forcePush : MonoBehaviour {
+public class forcePush : MonoBehaviour
+{
 
     public int health = 5;
     public int score = 0;
@@ -18,6 +19,8 @@ public class forcePush : MonoBehaviour {
     //Health is done with Pics now
     public Text myTextHealth;
     public Text myTextScore;
+    public Text myHighScore;
+
     public float destroyTime = 0.1f;
     //Screen Shake
     public GameObject mahCamera;
@@ -39,10 +42,14 @@ public class forcePush : MonoBehaviour {
     public GameObject UI1;
     public GameObject UI2;
     public GameObject UI3;
+    public GameObject highScoreUI;
 
     private AudioSource source;
     public float nextFire = -1.0f;
 
+    //High Score
+    public int highScore = 0;
+    string highScoreKey = "HighScore";
 
 
     void Awake()
@@ -53,12 +60,15 @@ public class forcePush : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         nextFire = Time.time;
+        highScore = PlayerPrefs.GetInt(highScoreKey, 0);
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         //myTextHealth = GameObject.Find("health").GetComponent<Text>();
         myTextScore = GameObject.Find("score").GetComponent<Text>();
 
@@ -72,11 +82,11 @@ public class forcePush : MonoBehaviour {
         Move();
         resetGame();
 
-            if (health == 0 && gameOver == false)
+        if (health == 0 && gameOver == false)
         {
             var getPlayer = GameObject.FindGameObjectWithTag("Player");
             GameObject[] getSpawners = GameObject.FindGameObjectsWithTag("spawners");
-            Instantiate(explode, new Vector3 (0,0,0), Quaternion.identity);
+            Instantiate(explode, new Vector3(0, 0, 0), Quaternion.identity);
             Destroy(GameObject.FindWithTag("explode"), 1);
             Destroy(GameObject.FindWithTag("Enemy"));
 
@@ -91,20 +101,24 @@ public class forcePush : MonoBehaviour {
             UI1.SetActive(true);
             UI2.SetActive(true);
             UI3.SetActive(true);
+            highScoreUI.SetActive(true);
+            myHighScore = GameObject.Find("highScore").GetComponent<Text>();
+            myHighScore.text = "High Score: " + highScore;
+            
 
             Destroy(getPlayer);
             gameOver = true;
 
-            
+
         }
 
-       if (score == 5)
+        if (score == 5)
         {
             spawn1.SetActive(true);
             spawn2.SetActive(true);
         }
 
-       if (score == 10)
+        if (score == 10)
         {
             spawn3.SetActive(true);
             spawn4.SetActive(true);
@@ -130,18 +144,18 @@ public class forcePush : MonoBehaviour {
         Destroy(collision.gameObject);
         TakeDamage(1);
         mahCamera.GetComponent<Camera>().Shake();
-        
+
     }
 
-   /* void OnCollisionExit(Collision collision)
-    {
-        Asteroid a = collision.collider.GetComponent<Asteroid>();
-        if (a != null)
-        {
-            
-        }
-    }
-    */
+    /* void OnCollisionExit(Collision collision)
+     {
+         Asteroid a = collision.collider.GetComponent<Asteroid>();
+         if (a != null)
+         {
+
+         }
+     }
+     */
 
 
     public void TakeDamage(int damageAmount)
@@ -218,4 +232,15 @@ public class forcePush : MonoBehaviour {
         }
     }
 
+    void OnDisable()
+    {
+
+        //If our scoree is greter than highscore, set new higscore and save.
+        if (score > highScore)
+        {
+            PlayerPrefs.SetInt(highScoreKey, score);
+            PlayerPrefs.Save();
+        }
+
+    }
 }
