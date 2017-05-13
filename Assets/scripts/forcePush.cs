@@ -103,6 +103,10 @@ public class forcePush : MonoBehaviour
             UI2.SetActive(true);
             UI3.SetActive(true);
             highScoreUI.SetActive(true);
+            if (score > highScore)
+            {
+                highScore = score;
+            }
             myHighScore = GameObject.Find("highScore").GetComponent<Text>();
             myHighScore.text = "High Score: " + highScore;
             
