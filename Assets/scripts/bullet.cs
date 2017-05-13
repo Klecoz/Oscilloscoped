@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class bullet : MonoBehaviour {
 
     public GameObject explode;
-
+    public GameObject healthBonusImage;
+    public GameObject bigHealthRemove;
 
 
 
@@ -26,6 +27,38 @@ public class bullet : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
+
+        if (GameObject.FindWithTag("bigEnemy") != null)
+        {
+            bigHealthRemove = GameObject.FindGameObjectWithTag("bigEnemy");
+            bigAsteroid removeBig = bigHealthRemove.GetComponent<bigAsteroid>();
+
+            if (collision.gameObject.tag == "bigEnemy" && removeBig.bigAsteroidHealth > 0)
+            {
+                removeBig.bigAsteroidHealth = removeBig.bigAsteroidHealth - 1;
+                Destroy(gameObject);
+            }
+
+            if (collision.gameObject.tag == "bigEnemy" && removeBig.bigAsteroidHealth == 0)
+            {
+                //fp.score++;
+                GameObject collsphere = GameObject.Find("collidaSphere");
+                forcePush fp = collsphere.GetComponent<forcePush>();
+                fp.score++;
+                if (fp.health < 5)
+                {
+                    fp.health++;
+                    fp.addHealth();
+                }
+                Instantiate(explode, collision.transform.position, collision.transform.rotation);
+                Instantiate(healthBonusImage, collision.transform.position, collision.transform.rotation);
+                Destroy(collision.gameObject);
+                Destroy(GameObject.FindWithTag("explode"), .5f);
+                Destroy(GameObject.FindWithTag("healthExplode"), .9f);
+                Destroy(this.gameObject);
+            }
+        }
+
         if (collision.gameObject.tag == "Enemy")
         {
             //fp.score++;
@@ -37,6 +70,10 @@ public class bullet : MonoBehaviour {
             Destroy(GameObject.FindWithTag("explode"), .5f);
             Destroy(this.gameObject);
         }
+
+           
+        
+
 
     }
 

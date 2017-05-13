@@ -177,6 +177,26 @@ public class forcePush : MonoBehaviour {
         Debug.Log("Health is now " + health);
     }
 
+    public void addHealth()
+    {
+        if (health == 5)
+        {
+            health1.SetActive(true);
+        }
+        if (health == 4)
+        {
+            health2.SetActive(true);
+        }
+        if (health == 3)
+        {
+            health3.SetActive(true);
+        }
+        if (health == 2)
+        {
+            health4.SetActive(true);
+        }
+    }
+
     void Move()
     {
         if (Input.GetKey(KeyCode.A))

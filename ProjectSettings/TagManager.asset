@@ -10,6 +10,8 @@ TagManager:
   - bullet
   - spawners
   - gameover
+  - bigEnemy
+  - healthExplode
   layers:
   - Default
   - TransparentFX
