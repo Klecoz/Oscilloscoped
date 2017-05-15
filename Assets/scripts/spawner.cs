@@ -16,8 +16,8 @@ public class spawner : MonoBehaviour {
     {
         GameObject ene = Instantiate(enemy, transform.position, transform.rotation) as GameObject;
 
-        Vector3 randomSize = new Vector3(Random.Range(6, 10), Random.Range(6, 10), Random.Range(6, 10));
-
+        Vector3 randomSize = new Vector3(Random.Range(4f, 12f), Random.Range(4f, 12f), Random.Range(4f, 12f));
+        //Debug.Log("random size " + randomSize);
         ene.transform.localScale = randomSize;
     }
 }

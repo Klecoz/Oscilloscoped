@@ -106,7 +106,10 @@ public class forcePush : MonoBehaviour
             if (score > highScore)
             {
                 highScore = score;
+                PlayerPrefs.SetInt(highScoreKey, score + 1);
+                PlayerPrefs.Save();
             }
+
             myHighScore = GameObject.Find("highScore").GetComponent<Text>();
             myHighScore.text = "High Score: " + highScore;
             
@@ -246,15 +249,5 @@ public class forcePush : MonoBehaviour
         }
     }
 
-    void OnDisable()
-    {
 
-        //If our scoree is greter than highscore, set new higscore and save.
-        if (score > highScore)
-        {
-            PlayerPrefs.SetInt(highScoreKey, score);
-            PlayerPrefs.Save();
-        }
-
-    }
 }
